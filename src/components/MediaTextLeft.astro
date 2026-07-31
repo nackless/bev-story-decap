@@ -1,0 +1,97 @@
+---
+interface Props {
+  image: string;
+  alt?: string;
+  caption?: string;
+  width?: string;
+  borderRadius?: string | number;
+  aspectRatio?: string;
+  gap?: string;
+}
+
+const {
+  image,
+  alt = "",
+  caption,
+  width = "45%",
+  borderRadius = "8px",
+  aspectRatio,
+  gap = "1.5rem",
+} = Astro.props;
+
+const formattedRadius = typeof borderRadius === "number" ? `${borderRadius}px` : borderRadius;
+---
+
+<div class="media-text-left" style={`gap: ${gap};`}>
+  <div 
+    class="media-col" 
+    style={`flex-basis: ${width}; max-width: ${width};`}
+  >
+    <div 
+      class="img-wrapper" 
+      style={`border-radius: ${formattedRadius}; ${aspectRatio ? `aspect-ratio: ${aspectRatio};` : ""}`}
+    >
+      <img 
+        src={image} 
+        alt={alt} 
+        loading="lazy" 
+        style={`${aspectRatio ? "height: 100%; object-fit: cover;" : "height: auto;"}`}
+      />
+    </div>
+    {caption && <p class="caption">{caption}</p>}
+  </div>
+
+  <div class="text-col">
+    <slot />
+  </div>
+</div>
+
+<style>
+  .media-text-left {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    margin: 2rem 0;
+    width: 100%;
+  }
+
+  .media-col {
+    flex-shrink: 0;
+    width: 100%;
+  }
+
+  .img-wrapper {
+    overflow: hidden;
+    width: 100%;
+  }
+
+  .img-wrapper img {
+    width: 100%;
+    max-width: 100%;
+    display: block;
+  }
+
+  .caption {
+    font-size: 0.875rem;
+    color: #666;
+    text-align: center;
+    margin-top: 0.5rem;
+    font-style: italic;
+  }
+
+  .text-col {
+    flex: 1;
+    min-width: 0;
+  }
+
+  @media (max-width: 768px) {
+    .media-text-left {
+      flex-direction: column;
+    }
+
+    .media-col {
+      max-width: 100% !important;
+      flex-basis: 100% !important;
+    }
+  }
+</style>
