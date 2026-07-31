@@ -1,0 +1,99 @@
+---
+interface Props {
+  src?: string;
+  image?: string;
+  alt?: string;
+  caption?: string;
+  width?: "narrow" | "medium" | "wide" | "full" | string;
+  align?: "center" | "left" | "right";
+  borderRadius?: string | number;
+  aspectRatio?: string;
+}
+
+const {
+  src,
+  image,
+  alt = "",
+  caption,
+  width = "full",
+  align = "center",
+  borderRadius = "8px",
+  aspectRatio,
+} = Astro.props;
+
+const imageSrc = src || image || "";
+
+// Resolve width keywords to values
+const widthMap: Record<string, string> = {
+  narrow: "50%",
+  medium: "75%",
+  wide: "90%",
+  full: "100%",
+};
+
+const resolvedWidth = widthMap[width] || width;
+const formattedRadius = typeof borderRadius === "number" ? `${borderRadius}px` : borderRadius;
+---
+
+<figure class={`image-block align-${align}`} style={`max-width: ${resolvedWidth};`}>
+  <div 
+    class="img-container" 
+    style={`border-radius: ${formattedRadius}; ${aspectRatio ? `aspect-ratio: ${aspectRatio};` : ""}`}
+  >
+    <img 
+      src={imageSrc} 
+      alt={alt} 
+      loading="lazy" 
+      style={`${aspectRatio ? "height: 100%; object-fit: cover;" : "height: auto;"}`}
+    />
+  </div>
+  {caption && <figcaption class="image-caption">{caption}</figcaption>}
+</figure>
+
+<style>
+  .image-block {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .image-block.align-center {
+    margin-left: auto;
+    margin-right: auto;
+    align-items: center;
+  }
+
+  .image-block.align-left {
+    margin-left: 0;
+    margin-right: auto;
+    align-items: flex-start;
+  }
+
+  .image-block.align-right {
+    margin-left: auto;
+    margin-right: 0;
+    align-items: flex-end;
+  }
+
+  .img-container {
+    overflow: hidden;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .img-container img {
+    width: 100%;
+    max-width: 100%;
+    display: block;
+  }
+
+  .image-caption {
+    font-size: 0.875rem;
+    color: #666;
+    text-align: center;
+    margin-top: 0.5rem;
+    font-style: italic;
+  }
+</style>

@@ -1,17 +1,27 @@
 ---
 title: "Obsidian Workflow & Layout Demo"
 pubDate: 2026-08-01
-description: "Demonstrating Obsidian paragraph spacing and MediaTextLeft / MediaTextRight components in Astro."
+description: "Demonstrating Obsidian paragraph spacing, ImageBlock, and MediaTextLeft / MediaTextRight components in Astro."
 image: "/_astro/bsLogo.CYZPZg9Z_gjnBW.webp"
 tags: ["obsidian", "demo", "astro"]
 ---
 
+import ImageBlock from '../../components/ImageBlock.astro';
 import MediaTextLeft from '../../components/MediaTextLeft.astro';
 import MediaTextRight from '../../components/MediaTextRight.astro';
 
 Writing blog posts in Obsidian is now completely seamless. When you press Enter in Obsidian to create space between paragraphs, Astro renders that exact clean spacing automatically on your site.
 
 Every paragraph is spaced out comfortably for reading, ensuring long-form articles look elegant without any manual formatting hacks.
+
+<ImageBlock
+  src="/_astro/bsLogo.CYZPZg9Z_gjnBW.webp"
+  alt="Beverage Story Logo Wide"
+  width="wide"
+  align="center"
+  caption="Standardized ImageBlock component with preset wide layout"
+  borderRadius="12px"
+/>
 
 <MediaTextLeft 
   image="/_astro/bsLogo.CYZPZg9Z_gjnBW.webp" 
