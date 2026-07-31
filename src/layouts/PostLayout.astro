@@ -5,10 +5,7 @@ const { frontmatter = {} } = Astro.props;
 
 import dateFormat from "../utils/dateFormat";
 
-// Cloudinary config
-const cloudinaryEnabled = import.meta.env.VITE_CLOUDINARY_CLOUD_NAME;
-
-// Optimize cover images
+// Cover image url & alt
 let coverImageUrl: string | null = null;
 let imageAlt = frontmatter?.title || "Beverage Story";
 
@@ -19,26 +16,7 @@ const imageUrl = typeof rawImage === 'string'
 
 if (imageUrl && typeof imageUrl === 'string') {
   imageAlt = (typeof rawImage === 'object' && rawImage?.alt) || frontmatter?.title || "Beverage Story";
-  
-  // Check if image is from Cloudinary
-  if (imageUrl.includes('cloudinary.com')) {
-    // Add transformations to Cloudinary URL for optimization
-    const width = (typeof rawImage === 'object' && rawImage?.width) || 800;
-    // Insert transformations before the filename
-    const parts = imageUrl.split('/upload/');
-    if (parts.length === 2) {
-      // Add responsive width, quality optimization, and format
-      const transforms = `c_limit,w_${width},q_auto,f_auto/`;
-      coverImageUrl = `${parts[0]}/upload/${transforms}${parts[1]}`;
-    } else {
-      coverImageUrl = imageUrl;
-    }
-  } else if (imageUrl.startsWith('/uploads/')) {
-    // Local uploads (no optimization)
-    coverImageUrl = imageUrl;
-  } else {
-    coverImageUrl = imageUrl;
-  }
+  coverImageUrl = imageUrl;
 }
 ---
 

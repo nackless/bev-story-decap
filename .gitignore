@@ -5,7 +5,6 @@ dist
 .env.local
 .astro
 public/uploads/
-tina/__generated__/
 
 #System Files
 .DS_Store
