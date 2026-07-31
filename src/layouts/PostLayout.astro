@@ -1,0 +1,162 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { Image, getImage } from "astro:assets";
+const { frontmatter = {} } = Astro.props;
+
+import dateFormat from "../utils/dateFormat";
+
+// Cloudinary config
+const cloudinaryEnabled = import.meta.env.VITE_CLOUDINARY_CLOUD_NAME;
+
+// Optimize cover images
+let coverImageUrl: string | null = null;
+let imageAlt = frontmatter?.title || "Beverage Story";
+
+const rawImage = frontmatter?.image;
+const imageUrl = typeof rawImage === 'string' 
+  ? rawImage 
+  : (rawImage && typeof rawImage === 'object' && typeof rawImage.url === 'string' ? rawImage.url : undefined);
+
+if (imageUrl && typeof imageUrl === 'string') {
+  imageAlt = (typeof rawImage === 'object' && rawImage?.alt) || frontmatter?.title || "Beverage Story";
+  
+  // Check if image is from Cloudinary
+  if (imageUrl.includes('cloudinary.com')) {
+    // Add transformations to Cloudinary URL for optimization
+    const width = (typeof rawImage === 'object' && rawImage?.width) || 800;
+    // Insert transformations before the filename
+    const parts = imageUrl.split('/upload/');
+    if (parts.length === 2) {
+      // Add responsive width, quality optimization, and format
+      const transforms = `c_limit,w_${width},q_auto,f_auto/`;
+      coverImageUrl = `${parts[0]}/upload/${transforms}${parts[1]}`;
+    } else {
+      coverImageUrl = imageUrl;
+    }
+  } else if (imageUrl.startsWith('/uploads/')) {
+    // Local uploads (no optimization)
+    coverImageUrl = imageUrl;
+  } else {
+    coverImageUrl = imageUrl;
+  }
+}
+---
+
+<BaseLayout 
+  pageTitle={frontmatter.title} 
+  description={frontmatter.description} 
+  image={coverImageUrl || undefined}
+>
+  <h1 class="blog-title">{frontmatter.title}</h1>
+
+  <p class="date">{dateFormat(frontmatter.pubDate)}</p>
+  <!-- <h3 class="date">{frontmatter.pubDate.toString().slice(0, 10)}</h3> -->
+
+  {coverImageUrl && (
+    <div class={`cover-image-wrapper align-${frontmatter.image?.alignment || 'center'}`}>
+      <div 
+        class="image-container"
+        style={`border-radius: ${frontmatter.image?.borderRadius || 8}px;`}
+      >
+        <img 
+          src={coverImageUrl} 
+          alt={imageAlt}
+          width={frontmatter.image?.width || 800}
+          height={frontmatter.image?.height || 450}
+          loading="lazy"
+        />
+      </div>
+      {frontmatter.image?.caption && (
+        <p class="image-caption">{frontmatter.image.caption}</p>
+      )}
+    </div>
+  )}
+
+  <section class="main-content">
+    <slot />
+    <div class="all-posts">
+      <a href="../../all-posts">All Posts >></a>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  a {
+    color: black;
+    text-decoration: none;
+  }
+
+  .all-posts {
+    text-align: center;
+    padding-top: 1.5em;
+    padding-bottom: 1.5em;
+  }
+
+  .date {
+    text-align: center;
+  }
+
+  .date::after {
+    content: "";
+    display: block;
+    height: 1px;
+    width: 5.5em;
+    background: #b8b8b8;
+    margin: 0 auto;
+  }
+
+  @media screen and (min-width: 636px) {
+    .date {
+      text-align: center;
+    }
+
+    .date::after {
+      margin-top: 0.5em;
+      margin-bottom: 0.5em;
+      margin-left: auto;
+    }
+  }
+
+  .cover-image-wrapper {
+    margin: 2em 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .cover-image-wrapper.align-left {
+    align-items: flex-start;
+  }
+
+  .cover-image-wrapper.align-right {
+    align-items: flex-end;
+  }
+
+  .cover-image-wrapper.align-center {
+    align-items: center;
+  }
+
+  .image-container {
+    overflow: hidden;
+    max-width: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .image-container img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    width: 100%;
+  }
+
+  .image-caption {
+    font-size: 0.9em;
+    color: #666;
+    text-align: center;
+    margin-top: 0.5em;
+    font-style: italic;
+  }
+</style>

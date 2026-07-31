@@ -1,0 +1,32 @@
+{
+  "name": "astro",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "node ./scripts/run-tina-dev.mjs",
+    "start": "node ./scripts/run-tina-dev.mjs",
+    "dev:astro": "astro dev --host 0.0.0.0",
+    "build": "node ./scripts/run-tina-build.mjs",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "astro": "^5.0.4",
+    "astro-cloudinary": "^1.3.5",
+    "cloudinary": "^2.10.0",
+    "date-fns": "^4.1.0",
+    "dotenv": "^17.4.2",
+    "tinacms": "^2.5.2",
+    "zod": "^3.25.76"
+  },
+  "devDependencies": {
+    "@babel/core": "7.24.0",
+    "@babel/types": "7.24.0",
+    "@tinacms/cli": "^1.12.6",
+    "@types/node": "^22.10.2",
+    "chalk": "^4.1.2",
+    "rollup": "^4.34.9",
+    "semver": "^6.3.1",
+    "sharp": "^0.34.5"
+  }
+}
