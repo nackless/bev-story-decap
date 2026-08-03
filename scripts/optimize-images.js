@@ -2,7 +2,7 @@ import fs from 'fs/promises';
 import path from 'path';
 import sharp from 'sharp';
 
-const IMAGE_EXTENSIONS = ['.jpg', '.jpeg', '.png'];
+const IMAGE_EXTENSIONS = ['.jpg', '.jpeg', '.png', '.webp'];
 const MAX_WIDTH = 1920;
 const JPEG_QUALITY = 80;
 
@@ -16,6 +16,8 @@ async function optimizeImage(filePath) {
   let optimized;
   if (ext === '.png') {
     optimized = await image.png({ compressionLevel: 9, adaptiveFiltering: true, palette: false }).toBuffer();
+  } else if (ext === '.webp') {
+    optimized = await image.webp({ quality: JPEG_QUALITY }).toBuffer();
   } else {
     optimized = await image.jpeg({ quality: JPEG_QUALITY, mozjpeg: true }).toBuffer();
   }
