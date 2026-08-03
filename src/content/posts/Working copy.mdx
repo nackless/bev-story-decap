@@ -33,29 +33,40 @@ Write your introductory paragraph here. Simply press **Enter** to create a blank
 ## Section Heading
 
 ---
+import { Image } from 'astro:assets';
+
 const { 
   image, 
   alt = "", 
   caption, 
   width = "35%", 
   borderRadius = "12px", 
-  gap = "1.5rem",
-  optimized = false 
+  gap = "1.5rem" 
 } = Astro.props;
 
-// Handles both imported local image objects and string paths
-const imageSrc = typeof image === 'object' && image !== null ? image.src : image;
+// Determine if the image is an imported asset object or a path string/URL
+const isImportedImage = typeof image === 'object' && image !== null;
 
 ---
 
 <div class="media-text-left" style={`--img-width: ${width}; --gap: ${gap};`}>
   <div class="media-image-wrapper">
-    <img 
-      src={myPhoto} 
-      alt={alt} 
-      style={`border-radius: ${borderRadius};`}
-      loading="lazy"
-    />
+    {isImportedImage ? (
+      <Image 
+        src={image} 
+        alt={alt} 
+        style={`border-radius: ${borderRadius};`}
+        class="media-img"
+      />
+    ) : (
+      <img 
+        src={myPhoto} 
+        alt={alt} 
+        style={`border-radius: ${borderRadius};`}
+        class="media-img"
+        loading="lazy"
+      />
+    )}
     {caption && <p class="caption">{caption}</p>}
   </div>
   <div class="media-content">
@@ -67,7 +78,7 @@ const imageSrc = typeof image === 'object' && image !== null ? image.src : image
   .media-text-left {
     display: flex;
     flex-direction: row;
-    align-items: flex-start; /* Stops image container from stretching vertically */
+    align-items: flex-start; /* Crucial: Prevents stretching image height to match text */
     gap: var(--gap);
     margin: 2rem 0;
   }
@@ -77,10 +88,11 @@ const imageSrc = typeof image === 'object' && image !== null ? image.src : image
     width: var(--img-width);
   }
 
-  .media-image-wrapper img {
-    width: 100%;
-    height: auto;           /* Forces correct aspect ratio preservation */
-    object-fit: cover;
+  /* Applied to both <Image /> and standard <img> */
+  :global(.media-img), .media-img {
+    width: 100% !important;
+    height: auto !important; /* Forces physical height to adjust to natural aspect ratio */
+    object-fit: contain;
     display: block;
   }
 
@@ -95,7 +107,7 @@ const imageSrc = typeof image === 'object' && image !== null ? image.src : image
     flex: 1;
   }
 
-  /* Mobile screen responsive rules */
+  /* Mobile responsiveness */
   @media (max-width: 768px) {
     .media-text-left {
       flex-direction: column;
@@ -108,13 +120,6 @@ const imageSrc = typeof image === 'object' && image !== null ? image.src : image
     }
   }
 </style>
-
-
-This is paragraph text sitting to the right of the image. 
-
-You can write multiple paragraphs inside the block, and the height automatically scales proportionally without distorting the image.
-
-</MediaTextLeft>
 
 
 Second paragraph goes here. You can use standard Markdown formatting like **bold text**, *italics*, [links](https://example.com), and lists.
