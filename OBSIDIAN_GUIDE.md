@@ -36,6 +36,8 @@ Write your introductory paragraph here. Simply press **Enter** to create a blank
   width="wide"
   align="center"
   caption="The pond after the latest cleanup."
+  optimized
+  aspectRatio="16/9"
 />
 
 ## Section Heading
@@ -84,6 +86,8 @@ Use `<ImageBlock />` for all standalone inline images:
   caption="Optional image caption"
   width="45%"
   borderRadius="12px"
+  optimized
+  aspectRatio="4/3"
 >
 
 This is paragraph text sitting to the right of the image. 
@@ -104,7 +108,8 @@ You can write multiple paragraphs inside the block, and the height automatically
   caption="Optional image caption"
   width="40%"
   borderRadius="8px"
-  aspectRatio="1/1"
+  optimized
+  aspectRatio="4/3"
 >
 
 This is paragraph text sitting to the left of the image. 
@@ -134,6 +139,12 @@ On mobile devices, this component automatically stacks vertically for an optimal
 
 ---
 
-## 5. Paragraph Spacing Rule
+## 5. Aspect Ratio Rule
+
+- Keep images in their natural proportions. The shared layout components now preserve the original aspect ratio instead of stretching or cropping them.
+- Use the `aspectRatio` prop only when you want a fixed frame for a layout, for example `aspectRatio="16/9"` or `aspectRatio="4/3"`.
+- Leave it off for full natural rendering if you want the image to appear at its real dimensions.
+
+## 6. Paragraph Spacing Rule
 
 - **Single Enter / Blank line in Obsidian**: Translates automatically to `1.5rem` bottom margin between paragraphs on the blog. No manual `<br>` tags needed!

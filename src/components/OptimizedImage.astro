@@ -8,6 +8,9 @@ interface Props {
   height?: number;
   sizes?: string;
   loading?: 'lazy' | 'eager';
+  class?: string;
+  style?: string;
+  objectFit?: 'contain' | 'cover' | 'fill' | 'none' | 'scale-down';
 }
 
 const {
@@ -17,7 +20,19 @@ const {
   height = 800,
   sizes = '100vw',
   loading = 'lazy',
+  class: className,
+  style,
+  objectFit = 'contain',
 } = Astro.props;
+
+const resolvedStyle = [
+  'display: block;',
+  'width: 100%;',
+  'height: auto;',
+  `object-fit: ${objectFit};`,
+  'object-position: center;',
+  style,
+].filter(Boolean).join(' ');
 ---
 
 <Image
@@ -27,4 +42,6 @@ const {
   height={height}
   sizes={sizes}
   loading={loading}
+  class={className}
+  style={resolvedStyle}
 />
