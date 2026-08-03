@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "astro dev --host 0.0.0.0",
     "start": "astro dev",
-    "build": "astro build",
+    "optimize-images": "node scripts/optimize-images.js src/content src/images",
+    "build": "npm run optimize-images && astro build",
     "preview": "astro preview",
     "astro": "astro",
     "generate-types": "wrangler types"
