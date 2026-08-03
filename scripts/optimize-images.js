@@ -3,23 +3,23 @@ import path from 'path';
 import sharp from 'sharp';
 
 const IMAGE_EXTENSIONS = ['.jpg', '.jpeg', '.png', '.webp'];
-const MAX_WIDTH = 1920;
-const JPEG_QUALITY = 80;
+const MAX_WIDTH = 1600;
+const JPEG_QUALITY = 70;
 
 async function optimizeImage(filePath) {
   const ext = path.extname(filePath).toLowerCase();
   if (!IMAGE_EXTENSIONS.includes(ext)) return false;
 
   const buffer = await fs.readFile(filePath);
-  const image = sharp(buffer).rotate().resize({ width: MAX_WIDTH, withoutEnlargement: true });
+  const image = sharp(buffer).rotate().resize({ width: MAX_WIDTH, withoutEnlargement: true }).withMetadata(false);
 
   let optimized;
   if (ext === '.png') {
     optimized = await image.png({ compressionLevel: 9, adaptiveFiltering: true, palette: false }).toBuffer();
   } else if (ext === '.webp') {
-    optimized = await image.webp({ quality: JPEG_QUALITY }).toBuffer();
+    optimized = await image.webp({ quality: JPEG_QUALITY, effort: 6 }).toBuffer();
   } else {
-    optimized = await image.jpeg({ quality: JPEG_QUALITY, mozjpeg: true }).toBuffer();
+    optimized = await image.jpeg({ quality: JPEG_QUALITY, mozjpeg: true, progressive: true }).toBuffer();
   }
 
   if (optimized.length < buffer.length) {
