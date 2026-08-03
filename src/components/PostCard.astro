@@ -1,14 +1,19 @@
 ---
+import { cleanDescription } from '../utils/cleanDescription.js';
+
 const { url, title, date, description } = Astro.props;
+const sanitizedDescription = cleanDescription(description);
 ---
 
 <a class="blog-card" href={url}>
   <div>
     <h3 class="title">{title}</h3>
     <p class="date">{date}</p>
-    <p class="description">
-      {description}
-    </p>
+    {sanitizedDescription && (
+      <p class="description">
+        {sanitizedDescription}
+      </p>
+    )}
   </div>
 </a>
 
