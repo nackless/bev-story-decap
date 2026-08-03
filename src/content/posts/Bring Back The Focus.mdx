@@ -1,0 +1,65 @@
+---
+title: Bring back the focus
+pubDate: 2026-08-03
+author: Aman Paul
+description: Demonstrating Obsidian paragraph spacing, ImageBlock, MediaTextLeft and MediaTextRight components in Astro. A brief description of your post for preview cards and SEO.
+tags:
+  - demo
+  - astro
+---
+
+import ImageBlock from '../../components/ImageBlock.astro';
+import MediaTextLeft from '../../components/MediaTextLeft.astro';
+import MediaTextRight from '../../components/MediaTextRight.astro';
+import bleedingBrain from '../assets/bleeding-brain.jpg';
+import wiredBrain from '../assets/wired-brain.jpg';
+import blurryLines from '../assets/blurry-lines.jpg'
+
+<ImageBlock
+  src={bleedingBrain}
+  alt="Beverage Story Logo Wide"
+  width="wide"
+  align="center"
+  caption="Standardized ImageBlock component with preset wide layout"
+  borderRadius="12px"
+  optimized
+/>
+
+I have been working on something since this morning. Working on building this blog. I have been trying to get the basic template sorted so posting becomes easy and I can write something and just post it right away from my phone. It has been hard work but I am so much involved in this that my brain is just going crazy. 
+
+I can't think of anything else. I didn't know how this is going to benefit me but my aim is to be able to post easily and be able to optimise images easily. 
+
+This post is not about this though. It's about getting myself off this as I have another very important thing to do and I seen to have put that off totally for this and now I'm not able to do that.
+
+
+## First Step
+
+
+<MediaTextLeft 
+  image={blurryLines} 
+  alt="Beverage Story Logo Left"
+  caption="Wavy pattern on my brain waves"
+  width="35%"
+  borderRadius="12px"
+  optimized>
+
+
+I am trying to clear my head. The plan is to do breathing exercise for 10 mins and see if this solves the problem.
+
+</MediaTextLeft>
+
+
+<MediaTextRight 
+  image={wiredBrain} 
+  alt="Beverage Story Logo Right"
+  caption="Mesh around my brain"
+  width="35%"
+  borderRadius="16px"
+  aspectRatio="1/1"
+  optimized
+>
+
+If this does not work, then I'm simply going to sit and start working.
+
+</MediaTextRight>
+
