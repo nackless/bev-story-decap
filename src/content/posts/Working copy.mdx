@@ -1,0 +1,125 @@
+---
+title: Working copy
+pubDate: 2026-08-03
+author: Aman Paul
+description: Demonstrating Obsidian paragraph spacing, ImageBlock, and MediaTextLeft / MediaTextRight components in Astro. A brief description of your post for preview cards and SEO.
+tags:
+  - demo
+  - astro
+---
+
+import ImageBlock from '../../components/ImageBlock.astro';
+import MediaTextLeft from '../../components/MediaTextLeft.astro';
+import MediaTextRight from '../../components/MediaTextRight.astro';
+import myPhoto from '../assets/my-photo.jpg';
+
+# Working copy
+
+
+Write your introductory paragraph here. Simply press **Enter** to create a blank line between paragraphs, and it will render with clean, automatic vertical spacing on your blog.
+
+<ImageBlock
+  src={myPhoto}
+  alt="Beverage Story Logo Wide"
+  width="wide"
+  align="center"
+  caption="Standardized ImageBlock component with preset wide layout"
+  borderRadius="12px"
+  optimized
+/>
+
+
+
+## Section Heading
+
+---
+import { Image } from 'astro:assets';
+
+const { 
+  image, 
+  alt = "", 
+  caption, 
+  width = "35%", 
+  borderRadius = "12px", 
+  gap = "1.5rem" 
+} = Astro.props;
+
+// Determine if the image is an imported asset object or a path string/URL
+const isImportedImage = typeof image === 'object' && image !== null;
+
+---
+
+<div class="media-text-left" style={`--img-width: ${width}; --gap: ${gap};`}>
+  <div class="media-image-wrapper">
+    {isImportedImage ? (
+      <Image 
+        src={image} 
+        alt={alt} 
+        style={`border-radius: ${borderRadius};`}
+        class="media-img"
+      />
+    ) : (
+      <img 
+        src={myPhoto} 
+        alt={alt} 
+        style={`border-radius: ${borderRadius};`}
+        class="media-img"
+        loading="lazy"
+      />
+    )}
+    {caption && <p class="caption">{caption}</p>}
+  </div>
+  <div class="media-content">
+    <slot />
+  </div>
+</div>
+
+<style>
+  .media-text-left {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start; /* Crucial: Prevents stretching image height to match text */
+    gap: var(--gap);
+    margin: 2rem 0;
+  }
+
+  .media-image-wrapper {
+    flex: 0 0 var(--img-width);
+    width: var(--img-width);
+  }
+
+  /* Applied to both <Image /> and standard <img> */
+  :global(.media-img), .media-img {
+    width: 100% !important;
+    height: auto !important; /* Forces physical height to adjust to natural aspect ratio */
+    object-fit: contain;
+    display: block;
+  }
+
+  .caption {
+    font-size: 0.85rem;
+    color: #666;
+    margin-top: 0.5rem;
+    text-align: center;
+  }
+
+  .media-content {
+    flex: 1;
+  }
+
+  /* Mobile responsiveness */
+  @media (max-width: 768px) {
+    .media-text-left {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .media-image-wrapper {
+      width: 100%;
+      flex: 1 1 100%;
+    }
+  }
+</style>
+
+
+Second paragraph goes here. You can use standard Markdown formatting like **bold text**, *italics*, [links](https://example.com), and lists.

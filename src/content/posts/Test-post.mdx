@@ -1,0 +1,62 @@
+---
+title: "This is a trial post"
+pubDate: 2026-08-01
+description: "Demonstrating Obsidian paragraph spacing, ImageBlock, and MediaTextLeft / MediaTextRight components in Astro."
+tags: ["obsidian", "demo", "astro"]
+---
+
+import ImageBlock from '../../components/ImageBlock.astro';
+import MediaTextLeft from '../../components/MediaTextLeft.astro';
+import MediaTextRight from '../../components/MediaTextRight.astro';
+import demoImage from '../../images/kirill-chukhnov-PEXAymTSZdE-unsplash.jpg';
+
+Writing blog posts in Obsidian is now completely seamless. When you press Enter in Obsidian to create space between paragraphs, Astro renders that exact clean spacing automatically on your site.
+
+Every paragraph is spaced out comfortably for reading, ensuring long-form articles look elegant without any manual formatting hacks.
+
+<ImageBlock
+  src={demoImage}
+  alt="Beverage Story Logo Wide"
+  width="wide"
+  align="center"
+  caption="Standardized ImageBlock component with preset wide layout"
+  borderRadius="12px"
+  optimized
+/>
+
+<MediaTextLeft 
+  image={demoImage} 
+  alt="Beverage Story Logo Left"
+  caption="MediaTextLeft: Image on left, text on right"
+  width="35%"
+  borderRadius="12px"
+  optimized
+>
+
+### Crafting Stories with Ease
+
+This section demonstrates the `MediaTextLeft` component. The image stays on the left with custom rounded corners, while the text flows naturally on the right side.
+
+As you adjust the image width, the height automatically updates to preserve the original aspect ratio without distortion.
+
+</MediaTextLeft>
+
+<MediaTextRight 
+  image={demoImage} 
+  alt="Beverage Story Logo Right"
+  caption="MediaTextRight: Text on left, image on right"
+  width="35%"
+  borderRadius="16px"
+  aspectRatio="1/1"
+  optimized
+>
+
+### Responsive Layout Flexibility
+
+This section demonstrates the `MediaTextRight` component. Here the image sits on the right with a custom square 1:1 aspect ratio.
+
+When viewed on smaller mobile screens, both components automatically adapt into a single-column layout for optimal reading.
+
+</MediaTextRight>
+
+Enjoy writing in Obsidian!
