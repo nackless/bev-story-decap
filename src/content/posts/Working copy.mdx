@@ -32,14 +32,83 @@ Write your introductory paragraph here. Simply press **Enter** to create a blank
 
 ## Section Heading
 
-<MediaTextLeft 
-  image={myPhoto} 
-  alt="Beverage Story Logo Left"
-  caption="MediaTextLeft: Image on left, text on right"
-  width="35%"
-  borderRadius="12px"
-  optimized
->
+---
+const { 
+  image, 
+  alt = "", 
+  caption, 
+  width = "35%", 
+  borderRadius = "12px", 
+  gap = "1.5rem",
+  optimized = false 
+} = Astro.props;
+
+// Handles both imported local image objects and string paths
+const imageSrc = typeof image === 'object' && image !== null ? image.src : image;
+
+---
+
+<div class="media-text-left" style={`--img-width: ${width}; --gap: ${gap};`}>
+  <div class="media-image-wrapper">
+    <img 
+      src={myPhoto} 
+      alt={alt} 
+      style={`border-radius: ${borderRadius};`}
+      loading="lazy"
+    />
+    {caption && <p class="caption">{caption}</p>}
+  </div>
+  <div class="media-content">
+    <slot />
+  </div>
+</div>
+
+<style>
+  .media-text-left {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start; /* Stops image container from stretching vertically */
+    gap: var(--gap);
+    margin: 2rem 0;
+  }
+
+  .media-image-wrapper {
+    flex: 0 0 var(--img-width);
+    width: var(--img-width);
+  }
+
+  .media-image-wrapper img {
+    width: 100%;
+    height: auto;           /* Forces correct aspect ratio preservation */
+    object-fit: cover;
+    display: block;
+  }
+
+  .caption {
+    font-size: 0.85rem;
+    color: #666;
+    margin-top: 0.5rem;
+    text-align: center;
+  }
+
+  .media-content {
+    flex: 1;
+  }
+
+  /* Mobile screen responsive rules */
+  @media (max-width: 768px) {
+    .media-text-left {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .media-image-wrapper {
+      width: 100%;
+      flex: 1 1 100%;
+    }
+  }
+</style>
+
 
 This is paragraph text sitting to the right of the image. 
 
