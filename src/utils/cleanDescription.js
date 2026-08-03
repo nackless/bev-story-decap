@@ -14,15 +14,12 @@ export function cleanDescription(value) {
   text = text.replace(/<\s*\/?.*?\s*\/?>/g, ' ');
   text = text.replace(/```[\s\S]*?```/g, ' ');
   text = text.replace(/`([^`]+)`/g, '$1');
-  text = text.replace(/[*_>#~]/g, ' ');
-  text = text.replace(/(?:\s*[\/|\\]\s*)+/g, ' ');
-  text = text.replace(/[•·]+/g, ' ');
   text = text.replace(/\[([^\]]+)\]\([^\)]+\)/g, '$1');
-  text = text.replace(/,/g, ' ');
-  text = text.replace(/\s{2,}/g, ' ');
+  text = text.replace(/(^|\s)#([A-Za-z0-9_-]+)/g, '$1$2');
+  text = text.replace(/[*_>~]/g, ' ');
 
   for (const name of COMPONENT_NAMES) {
-    text = text.replace(new RegExp(name, 'gi'), '');
+    text = text.replace(new RegExp(`\\b${name}\\b`, 'gi'), '');
   }
 
   text = normalizeWhitespace(text);
