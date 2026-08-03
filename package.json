@@ -9,7 +9,8 @@
     "build": "npm run optimize-images && astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "generate-types": "wrangler types"
+    "generate-types": "wrangler types",
+    "prepare": "husky install"
   },
   "dependencies": {
     "@astrojs/cloudflare": "^14.1.7",
@@ -22,6 +23,7 @@
   },
   "devDependencies": {
     "@types/node": "^22.10.2",
+    "husky": "^9.1.7",
     "sharp": "^0.34.5"
   }
 }
