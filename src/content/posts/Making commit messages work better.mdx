@@ -11,7 +11,7 @@ tags:
 import ImageBlock from '../../components/ImageBlock.astro';
 import MediaTextLeft from '../../components/MediaTextLeft.astro';
 import MediaTextRight from '../../components/MediaTextRight.astro';
-import demoImage from '../assets/my-image.jpg';
+import myPhoto from '../assets/my-photo.jpg';
 
 
 This is an attempt to make commit messages with date and time stamp. I have added a time block and hope it will show up with posting time.
@@ -20,13 +20,13 @@ That broke and the deployment failed for some reason. Not sure if it was because
 
 Still broken. Have removed {{}} from time in the post above but still now working.
 
-Trying {{now}} to see if that works.
+Trying `{{now}}` to see if that works.
 
-That did not work. Trying {{datetime}}.
+That did not work. Trying `{{datetime}}`.
 
-{{datetime}} worked but not showing GMT but UTC. Trying {{datetime:local}}.
+`{{datetime}}` worked but not showing GMT but UTC. Trying `{{datetime:local}}`.
 
-That did not work. Reverting to {{datetime}} for now. Will work on this later.
+That did not work. Reverting to `{{datetime}}` for now. Will work on this later.
 
 <ImageBlock
   src={myPhoto}
