@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "astro dev --host 0.0.0.0",
     "start": "astro dev",
-    "build": "astro build",
+    "build": "astro build && mkdir -p .cloudflare-dist && cp -R dist/client/. .cloudflare-dist/ && rm -rf dist && mv .cloudflare-dist dist",
     "preview": "astro preview",
     "astro": "astro",
     "generate-types": "wrangler types"
