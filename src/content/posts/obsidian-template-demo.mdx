@@ -2,33 +2,36 @@
 title: "Obsidian Workflow & Layout Demo"
 pubDate: 2026-08-01
 description: "Demonstrating Obsidian paragraph spacing, ImageBlock, and MediaTextLeft / MediaTextRight components in Astro."
-image: "/src/images/kirill-chukhnov-PEXAymTSZdE-unsplash.jpg"
+image: "/images/kirill-chukhnov-PEXAymTSZdE-unsplash.jpg"
 tags: ["obsidian", "demo", "astro"]
 ---
 
 import ImageBlock from '../../components/ImageBlock.astro';
 import MediaTextLeft from '../../components/MediaTextLeft.astro';
 import MediaTextRight from '../../components/MediaTextRight.astro';
+import demoImage from '../../images/kirill-chukhnov-PEXAymTSZdE-unsplash.jpg';
 
 Writing blog posts in Obsidian is now completely seamless. When you press Enter in Obsidian to create space between paragraphs, Astro renders that exact clean spacing automatically on your site.
 
 Every paragraph is spaced out comfortably for reading, ensuring long-form articles look elegant without any manual formatting hacks.
 
 <ImageBlock
-  src="/src/images/kirill-chukhnov-PEXAymTSZdE-unsplash.jpg"
+  src={demoImage}
   alt="Beverage Story Logo Wide"
   width="wide"
   align="center"
   caption="Standardized ImageBlock component with preset wide layout"
   borderRadius="12px"
+  optimized
 />
 
 <MediaTextLeft 
-  image="/src/images/kirill-chukhnov-PEXAymTSZdE-unsplash.jpg" 
+  image={demoImage} 
   alt="Beverage Story Logo Left"
   caption="MediaTextLeft: Image on left, text on right"
   width="35%"
   borderRadius="12px"
+  optimized
 >
 
 ### Crafting Stories with Ease
@@ -40,12 +43,13 @@ As you adjust the image width, the height automatically updates to preserve the 
 </MediaTextLeft>
 
 <MediaTextRight 
-  image="/src/images/kirill-chukhnov-PEXAymTSZdE-unsplash.jpg" 
+  image={demoImage} 
   alt="Beverage Story Logo Right"
   caption="MediaTextRight: Text on left, image on right"
   width="35%"
   borderRadius="16px"
   aspectRatio="1/1"
+  optimized
 >
 
 ### Responsive Layout Flexibility

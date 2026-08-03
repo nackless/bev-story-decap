@@ -1,4 +1,6 @@
 ---
+import OptimizedImage from './OptimizedImage.astro';
+
 interface Props {
   image: string;
   alt?: string;
@@ -7,6 +9,7 @@ interface Props {
   borderRadius?: string | number;
   aspectRatio?: string;
   gap?: string;
+  optimized?: boolean;
 }
 
 const {
@@ -17,6 +20,7 @@ const {
   borderRadius = "8px",
   aspectRatio,
   gap = "1.5rem",
+  optimized = false,
 } = Astro.props;
 
 const formattedRadius = typeof borderRadius === "number" ? `${borderRadius}px` : borderRadius;
@@ -35,12 +39,22 @@ const formattedRadius = typeof borderRadius === "number" ? `${borderRadius}px` :
       class="img-wrapper" 
       style={`border-radius: ${formattedRadius}; ${aspectRatio ? `aspect-ratio: ${aspectRatio};` : ""}`}
     >
-      <img 
-        src={image} 
-        alt={alt} 
-        loading="lazy" 
-        style={`${aspectRatio ? "height: 100%; object-fit: cover;" : "height: auto;"}`}
-      />
+      {optimized ? (
+        <OptimizedImage
+          src={image}
+          alt={alt}
+          width={800}
+          height={800}
+          sizes="(max-width: 768px) 100vw, 35vw"
+        />
+      ) : (
+        <img 
+          src={image} 
+          alt={alt} 
+          loading="lazy" 
+          style={`${aspectRatio ? "height: 100%; object-fit: cover;" : "height: auto;"}`}
+        />
+      )}
     </div>
     {caption && <p class="caption">{caption}</p>}
   </div>
