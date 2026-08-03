@@ -1,41 +1,28 @@
 ---
-title: "Your Post Title Here"
-pubDate: 2026-08-01
+title: "<% tp.file.title %>"
+pubDate: <% tp.file.creation_date("YYYY-MM-DD") %>
+author: Aman Paul
 description: "A brief description of your post for preview cards and SEO."
-image: "/uploads/cover-image.jpg"
-tags: ["beverage", "story"]
+tags:
+  - blog
+  - story
 ---
 
 import ImageBlock from '../../components/ImageBlock.astro';
 import MediaTextLeft from '../../components/MediaTextLeft.astro';
 import MediaTextRight from '../../components/MediaTextRight.astro';
 
-Write your introductory paragraph here. Press **Enter** to create a blank line between paragraphs and let the blog handle the spacing.
+Write your introductory paragraph here. Simply press **Enter** to create a blank line between paragraphs, and it will render with clean, automatic vertical spacing on your blog.
 
 <ImageBlock
   src="/uploads/photo.jpg"
   alt="Sample Photo"
   width="wide"
   align="center"
-  caption="Keep the image in its natural proportion."
-  optimized
-  aspectRatio="16/9"
+  caption="The pond after the latest cleanup."
+  borderRadius="12px"
 />
 
 ## Section Heading
-
-<MediaTextLeft
-  image="/uploads/sample.jpg"
-  alt="Sample description"
-  caption="Optional image caption"
-  width="45%"
-  borderRadius="12px"
-  optimized
-  aspectRatio="4/3"
->
-
-This is paragraph text sitting to the right of the image. The layout preserves the original image ratio rather than stretching or cropping it.
-
-</MediaTextLeft>
 
 Second paragraph goes here. You can use standard Markdown formatting like **bold text**, *italics*, [links](https://example.com), and lists.
