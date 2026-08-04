@@ -20,6 +20,8 @@ Copy and paste this snippet into your Obsidian Templates folder (e.g. `Templates
 title: "Your Post Title Here"
 pubDate: 2026-08-01
 description: "A brief description of your post for preview cards and SEO."
+image: "/uploads/cover-image.jpg"
+imageAlt: "Descriptive accessibility text for cover image"
 draft: false
 tags: ["beverage", "story"]
 ---

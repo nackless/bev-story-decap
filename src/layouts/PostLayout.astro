@@ -15,7 +15,7 @@ const imageUrl = typeof rawImage === 'string'
   : (rawImage && typeof rawImage === 'object' && typeof rawImage.url === 'string' ? rawImage.url : undefined);
 
 if (imageUrl && typeof imageUrl === 'string') {
-  imageAlt = (typeof rawImage === 'object' && rawImage?.alt) || frontmatter?.title || "Beverage Story";
+  imageAlt = frontmatter?.imageAlt || (typeof rawImage === 'object' && rawImage?.alt) || frontmatter?.title || "Beverage Story";
   coverImageUrl = imageUrl;
 }
 ---
@@ -41,7 +41,9 @@ if (imageUrl && typeof imageUrl === 'string') {
           alt={imageAlt}
           width={frontmatter.image?.width || 800}
           height={frontmatter.image?.height || 450}
-          loading="lazy"
+          loading="eager"
+          fetchpriority="high"
+          decoding="async"
         />
       </div>
       {frontmatter.image?.caption && (

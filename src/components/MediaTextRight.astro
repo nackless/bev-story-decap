@@ -24,6 +24,7 @@ const {
 } = Astro.props;
 
 const formattedRadius = typeof borderRadius === "number" ? `${borderRadius}px` : borderRadius;
+const resolvedAlt = alt || caption || "Blog image";
 ---
 
 <div class="media-text-right" style={`gap: ${gap};`}>
@@ -42,17 +43,20 @@ const formattedRadius = typeof borderRadius === "number" ? `${borderRadius}px` :
       {optimized ? (
         <OptimizedImage
           src={image}
-          alt={alt}
+          alt={resolvedAlt}
           width={800}
           height={800}
           sizes="(max-width: 768px) 100vw, 35vw"
+          loading="lazy"
+          decoding="async"
           style={aspectRatio ? "height: 100%; object-fit: contain;" : "height: auto; object-fit: contain;"}
         />
       ) : (
         <img 
           src={image} 
-          alt={alt} 
+          alt={resolvedAlt} 
           loading="lazy" 
+          decoding="async"
           style={aspectRatio ? "width: 100%; height: 100%; object-fit: contain;" : "width: 100%; height: auto; object-fit: contain;"}
         />
       )}

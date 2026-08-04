@@ -8,6 +8,8 @@ interface Props {
   height?: number;
   sizes?: string;
   loading?: 'lazy' | 'eager';
+  decoding?: 'async' | 'sync' | 'auto';
+  fetchpriority?: 'high' | 'low' | 'auto';
   class?: string;
   style?: string;
   objectFit?: 'contain' | 'cover' | 'fill' | 'none' | 'scale-down';
@@ -20,6 +22,8 @@ const {
   height = 800,
   sizes = '100vw',
   loading = 'lazy',
+  decoding = 'async',
+  fetchpriority,
   class: className,
   style,
   objectFit = 'contain',
@@ -42,6 +46,8 @@ const resolvedStyle = [
   height={height}
   sizes={sizes}
   loading={loading}
+  decoding={decoding}
+  fetchpriority={fetchpriority}
   class={className}
   style={resolvedStyle}
 />
