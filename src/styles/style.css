@@ -114,15 +114,15 @@ main {
 
 
 .blog-title {
-    font-family: var(--ff-header);
-    font-weight: var(--fw-bold);
-    font-size: clamp(2rem, 3vw, 2.8rem);
-    line-height: 1.15;
-    letter-spacing: 0.04em;
-    text-align: center;
-    padding-bottom: 0.75rem;
-    margin-bottom: 0.25rem;
-    color: #042940;
+  font-family: var(--ff-header);
+  font-weight: var(--fw-medium);
+  font-size: clamp(2rem, 3vw, 2.8rem);
+  line-height: 1.15;
+  letter-spacing: 0.04em;
+  text-align: center;
+  padding-bottom: 0.75rem;
+  margin-bottom: 0.25rem;
+  color: #042940;
 }
 
 .blog-card::after {
@@ -172,11 +172,12 @@ main {
 .main-content h2,
 .main-content h3,
 .main-content h4 {
-    margin-top: 2.25rem;
-    margin-bottom: 0.85rem;
-    color: #042940;
-    line-height: 1.25;
-    font-family: var(--ff-main);
+  margin-top: 2.25rem;
+  margin-bottom: 0.85rem;
+  color: #042940;
+  line-height: 1.25;
+  font-family: var(--ff-main);
+  font-weight: var(--fw-medium);
 }
 
 .main-content h1 {
@@ -195,7 +196,8 @@ h1,
 h2,
 h3,
 h4 {
-    font-family: var(--ff-main);
+  font-family: var(--ff-main);
+  font-weight: var(--fw-medium);
 }
 
 .main-content ul,
