@@ -8,7 +8,9 @@ import dateFormat from "../utils/dateFormat";
 // const allPosts = await Astro.glob("./posts/*.md"); - deprecated
 
 // get posts from getCollections
-const posts = await getCollection("posts");
+const posts = await getCollection("posts", ({ data }) => {
+  return import.meta.env.PROD ? !data.draft : true;
+});
 
 // sort the blog posts fromt newest to oldest (descending order)
 posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
