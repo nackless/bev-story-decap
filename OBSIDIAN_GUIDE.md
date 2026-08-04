@@ -21,7 +21,7 @@ title: "<% tp.file.title %>"
 pubDate: <% tp.file.creation_date("YYYY-MM-DD") %>
 author: Aman Paul
 description: "A brief description of your post for preview cards and SEO."
-image: ""
+image: "/uploads/cover-image.jpg"
 imageAlt: "Descriptive accessibility text for cover image"
 draft: false
 tags:
