@@ -12,19 +12,27 @@ const posts = await getCollection("posts", ({ data }) => {
   return import.meta.env.PROD ? !data.draft : true;
 });
 
-// sort the blog posts fromt newest to oldest (descending order)
-posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+// sort the blog posts from newest to oldest (descending order)
+posts.sort((a, b) => {
+  const dateA = new Date(a.data.pubDate || a.data.date || 0);
+  const dateB = new Date(b.data.pubDate || b.data.date || 0);
+  return dateB.valueOf() - dateA.valueOf();
+});
 ---
 
 <Baselayout pageTitle={pageTitle}>
   {
-    posts.map((post) => (
-      <PostCard
-        url={`/posts/${post.data.slug}/`}
-        title={post.data.title}
-        date={dateFormat(post.data.pubDate)}
-        description={post.data.description}
-      />
-    ))
+    posts.map((post) => {
+      const urlSlug = post.data?.slug || post.slug || post.id;
+      const displayTitle = post.data?.title || urlSlug;
+      return (
+        <PostCard
+          url={`/posts/${urlSlug}/`}
+          title={displayTitle}
+          date={post.data?.pubDate ? dateFormat(post.data.pubDate) : ""}
+          description={post.data?.description || ""}
+        />
+      );
+    })
   }
 </Baselayout>
