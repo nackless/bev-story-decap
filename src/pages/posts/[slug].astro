@@ -1,15 +1,16 @@
 ---
 import { getCollection, render } from "astro:content";
 import Layout from "../../layouts/PostLayout.astro";
+import { getPostSlug } from "../../utils/slugify";
 
 export async function getStaticPaths() {
   let posts = await getCollection("posts", ({ data }) => {
     return import.meta.env.PROD ? !data.draft : true;
   });
   return posts.map((post: any) => {
-    const slugValue = post.data?.slug || post.id;
+    const slugValue = getPostSlug(post);
     return {
-      params: { slug: String(slugValue) },
+      params: { slug: slugValue },
       props: { post },
     };
   });

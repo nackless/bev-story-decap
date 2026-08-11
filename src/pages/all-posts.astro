@@ -2,10 +2,10 @@
 import { getCollection } from "astro:content";
 import Baselayout from "../layouts/BaseLayout.astro";
 import PostCard from "../components/PostCard.astro";
-const pageTitle = "All Posts";
 import dateFormat from "../utils/dateFormat";
+import { getPostSlug } from "../utils/slugify";
 
-// const allPosts = await Astro.glob("./posts/*.md"); - deprecated
+const pageTitle = "All Posts";
 
 // get posts from getCollections
 const posts = await getCollection("posts", ({ data }) => {
@@ -23,8 +23,8 @@ posts.sort((a, b) => {
 <Baselayout pageTitle={pageTitle}>
   {
     posts.map((post) => {
-      const urlSlug = post.data?.slug || post.slug || post.id;
-      const displayTitle = post.data?.title || urlSlug;
+      const urlSlug = getPostSlug(post);
+      const displayTitle = post.data?.title || post.id;
       return (
         <PostCard
           url={`/posts/${urlSlug}/`}
