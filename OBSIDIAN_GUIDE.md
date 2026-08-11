@@ -139,3 +139,21 @@ On mobile devices, this component automatically stacks vertically for an optimal
 ## 6. Paragraph Spacing Rule
 
 - **Single Enter / Blank line in Obsidian**: Translates automatically to `1.5rem` bottom margin between paragraphs on the blog. No manual `<br>` tags needed!
+
+## 7. Obsidian Callouts & Quotations
+
+You can write standard Obsidian callout blocks and they will automatically render as styled cards on your blog (with the `[!type]` label automatically removed from display):
+
+### Quotation Callout (`> [!quote]`)
+```markdown
+> [!quote] “We are an impossibility in an impossible universe.”
+>
+> — Ray Bradbury
+```
+
+### Other Supported Callouts
+- Note / Info: `> [!note]` or `> [!info]`
+- Tip: `> [!tip]`
+- Warning: `> [!warning]`
+- Important / Danger: `> [!important]`
+
