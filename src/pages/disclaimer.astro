@@ -1,0 +1,81 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout pageTitle="Disclaimer - Beverage Story" description="Disclaimer for Beverage Story blog.">
+  <div class="disclaimer-container">
+    <h1 class="page-title">Disclaimer</h1>
+
+    <div class="disclaimer-content">
+      <p class="intro">
+        Welcome to <strong>Beverage Story</strong>. Please read this disclaimer carefully before using this website.
+      </p>
+
+      <h2>Personal Views & Opinions</h2>
+      <p>
+        The views, thoughts, and opinions expressed on this blog belong solely to the author (Aman Paul) and do not necessarily reflect the official policy, position, or views of any employer, organization, company, or individual I may be associated with.
+      </p>
+
+      <h2>Informational Purposes Only</h2>
+      <p>
+        The content provided on this website is for general informational and personal reflection purposes only. While I strive to provide accurate and up-to-date information, I make no representations or warranties of any kind, express or implied, about the completeness, accuracy, reliability, or suitability of the information contained herein.
+      </p>
+
+      <h2>Individual Responsibility</h2>
+      <p>
+        Any action you take based upon the information found on this website is strictly at your own risk. Readers are encouraged to verify information and draw their own independent conclusions.
+      </p>
+
+      <h2>External Links</h2>
+      <p>
+        This blog may contain links to external websites that are not provided or maintained by or in any way affiliated with Beverage Story. Please note that I do not guarantee the accuracy, relevance, timeliness, or completeness of any information on these external websites.
+      </p>
+
+      <h2>Updates & Modifications</h2>
+      <p>
+        I reserve the right to make additions, deletions, or modifications to the contents of this website at any time without prior notice.
+      </p>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .disclaimer-container {
+    padding-top: 0.5rem;
+  }
+
+  .page-title {
+    font-family: var(--ff-header);
+    font-weight: var(--fw-medium);
+    font-size: 2.2rem;
+    letter-spacing: 0.04em;
+    text-align: center;
+    color: #042940;
+    margin-bottom: 1.5rem;
+  }
+
+  .disclaimer-content {
+    font-family: var(--ff-content);
+    color: #333;
+    font-size: 1.1rem;
+    line-height: 1.75;
+  }
+
+  .intro {
+    font-size: 1.15rem;
+    margin-bottom: 1.75rem;
+  }
+
+  h2 {
+    font-family: var(--ff-main);
+    font-weight: var(--fw-medium);
+    font-size: 1.4rem;
+    color: #042940;
+    margin-top: 1.75rem;
+    margin-bottom: 0.75rem;
+  }
+
+  p {
+    margin-bottom: 1.25rem;
+  }
+</style>
