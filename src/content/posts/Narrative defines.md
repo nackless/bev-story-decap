@@ -1,7 +1,7 @@
 ---
 title: Narrative defines
 author: Aman Paul
-description:
+description: this post is about highlighting the importance of narrative and who runs the world 
 pubDate: 2026-08-11 08:38
 draft: false
 tags:
