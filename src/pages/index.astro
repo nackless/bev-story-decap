@@ -1,25 +1,11 @@
 ---
-import { getCollection } from "astro:content";
+import { getCollection, render } from "astro:content";
 import BaseLayout from "../layouts/BaseLayout.astro";
-import PostCard from "../components/PostCard.astro";
-import dateFormat from "../utils/dateFormat";
+import PostLayout from "../layouts/PostLayout.astro";
 
 let posts = await getCollection("posts", ({ data }) => {
   return import.meta.env.PROD ? !data.draft : true;
 }).catch(() => []);
-
-// Fallback: If Content Collections fails (due to spaces in folder paths), use Astro.glob
-if (!posts || posts.length === 0) {
-  const rawFiles = await Astro.glob("../content/posts/*.{md,mdx}").catch(() => []);
-  posts = rawFiles.map((file) => {
-    const id = file.file.split('/').pop()?.replace(/\.(md|mdx)$/, '');
-    return {
-      id: id,
-      slug: file.frontmatter.slug || id,
-      data: file.frontmatter,
-    };
-  });
-}
 
 posts = posts.filter((post) => (import.meta.env.PROD ? !post.data?.draft : true));
 
@@ -28,28 +14,21 @@ posts = posts.sort((a, b) => {
   const dateB = new Date(b.data.pubDate || b.data.date || 0);
   return dateB.valueOf() - dateA.valueOf();
 });
+
+const latestPost = posts[0];
+const { Content } = latestPost ? await render(latestPost) : { Content: null };
 ---
 
-<BaseLayout pageTitle="Welcome to Beverage Story">
-  {posts.length > 0 ? (
-    <>
-      {posts.map((post) => {
-        const urlSlug = post.data?.slug || post.slug || post.id;
-        const displayTitle = post.data?.title || urlSlug;
-        return (
-          <PostCard
-            url={`/posts/${urlSlug}/`}
-            title={displayTitle}
-            date={post.data?.pubDate ? dateFormat(post.data.pubDate) : ""}
-            description={post.data?.description || ""}
-          />
-        );
-      })}
-    </>
-  ) : (
+{latestPost && Content ? (
+  <PostLayout frontmatter={latestPost.data}>
+    <Content />
+  </PostLayout>
+) : (
+  <BaseLayout pageTitle="Welcome to Beverage Story">
     <div style="font-family: sans-serif; text-align: center; margin-top: 20vh;">
       <h1>Welcome to your new blog!</h1>
       <p>No posts were found. Add markdown posts to <code>src/content/posts</code> to get started.</p>
     </div>
-  )}
-</BaseLayout>
+  </BaseLayout>
+)}
+
