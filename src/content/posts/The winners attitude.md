@@ -3,7 +3,7 @@ title: The winners attitude
 author: Aman Paul
 description: What is winning
 pubDate: 2026-08-19
-draft: true
+draft: false
 tags:
   - Life-lessons
   - wisdom
