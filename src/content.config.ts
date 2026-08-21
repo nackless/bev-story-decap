@@ -4,12 +4,30 @@ import { glob } from "astro/loaders";
 // Import utilities from `astro:content`
 import { z, defineCollection } from "astro:content";
 
+function slugify(text: string): string {
+  return text
+    .toString()
+    .toLowerCase()
+    .trim()
+    .replace(/\s+/g, '-')
+    .replace(/[^\w\-]+/g, '')
+    .replace(/\-\-+/g, '-');
+}
+
 // Define a `loader` and `schema` for each collection
 const posts = defineCollection({
     loader: glob({ 
       pattern: '**/[^_]*.{md,mdx}', 
       base: "./src/content/posts",
-      generateId: ({ entry, data }) => data.id ? String(data.id) : entry.replace(/\.[^/.]+$/, "")
+      generateId: ({ entry, data }) => {
+        if (data.slug && String(data.slug).trim() !== '') {
+          return String(data.slug).trim();
+        }
+        if (data.id) {
+          return String(data.id).trim();
+        }
+        return slugify(entry.replace(/\.[^/.]+$/, ""));
+      }
     }),
     schema: z.object({
       title: z.string().optional(),
